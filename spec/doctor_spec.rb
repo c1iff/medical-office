@@ -1,15 +1,7 @@
-require ('rspec')
-require ('pg')
-require ('doctor')
+require ('spec_helper')
 
-DB = PG.connect({:dbname => 'office_test'})
+describe(Doctor) do
 
-RSpec.configure do |config|
-  config.after(:each) do
-    DB.exec('DELETE FROM doctors *;')
-  end
-
-describe(Doctor)
   describe('#first_name') do
     it ('returns the first name of a doctor') do
       new_doctor = Doctor.new(:first_name => 'Bob', :last_name => 'Blahblah', :speciality_name => 'Pediatics')

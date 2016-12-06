@@ -1,0 +1,22 @@
+<h1>Medical Office</h1>
+
+<h3>List of Doctors:<h3>
+
+<ul>
+  <% @doctors_list.each() do |doctor| %>
+    <li> <a href="/doctor/<%= doctor.id()%>"> Dr. <%= doctor.last_name() %> </li></a>
+  <% end %>
+</ul>
+
+<h3>Add a new Doctor (for Admin Only)</h3>
+<form action="/new_doctor" method="post">
+  <div class="from-group">
+    <label for='first_name' type='text'> Add First Name</label>
+    <input id='first_name' name='first_name' type='text' class="form-control">
+    <label for='last_name' type='text'> Add Last Name</label>
+    <input id='last_name' name='last_name' type='text' class="form-control">
+    <label for='speciality_name' type='text'> Add Speciality</label>
+    <input id='speciality_name' name='speciality_name' type='text' class="form-control"><br>
+    <button type='submit' class="btn btn-primary btn-lg">Add Doctor</button>
+  </div>
+</form>

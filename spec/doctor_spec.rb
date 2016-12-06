@@ -43,4 +43,12 @@ describe(Doctor) do
       expect(new_doctor.id()).to(be_an_instance_of(Fixnum))
     end
   end
+  describe('.find') do
+    it ('returns a doctor based on an id') do
+      new_doctor = Doctor.new(:first_name => 'Bob', :last_name => 'Blahblah', :speciality_name => 'Pediatics')
+      new_doctor.save()
+      expect(Doctor.find(new_doctor.id())).to(eq(new_doctor))
+    end
+  end
+
 end

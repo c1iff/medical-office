@@ -28,4 +28,10 @@ class Doctor
     &(self.last_name().==(another_doctor.last_name())).
     &(self.speciality_name().==(another_doctor.speciality_name()))
   end
+
+  define_singleton_method(:find) do |doctor_id|
+    doctor_id_found = DB.exec("SELECT * FROM doctors WHERE id = '#{doctor_id}';").first()
+    found_doctor = Doctor.new(:first_name => doctor_id_found.fetch('first_name'), :last_name => doctor_id_found.fetch('last_name'), :speciality_name => doctor_id_found.fetch('speciality_name'))
+    found_doctor
+  end
 end

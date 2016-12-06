@@ -61,5 +61,16 @@ describe(Doctor) do
       expect(Doctor.find_doctor_speciality('Pediatrics')).to(eq([new_doctor, new_doctor_two]))
     end
   end
+  describe('.get_speciality_name') do
+    it('returns an array of unique specialities stored in table') do
+      new_doctor = Doctor.new(:first_name => 'Bob', :last_name => 'Blahblah', :speciality_name => 'Pediatrics')
+      new_doctor.save()
+      new_doctor_two = Doctor.new(:first_name => 'Julia', :last_name => 'Gonzalez', :speciality_name => 'Pediatrics')
+      new_doctor_two.save()
+      new_doctor_three = Doctor.new(:first_name => 'Joy', :last_name => 'Blahblah', :speciality_name => 'Internal Medicine')
+      new_doctor_three.save()
+      expect(Doctor.get_speciality_name()).to(eq(['Pediatrics', 'Internal Medicine']))
+    end
+  end
 
 end

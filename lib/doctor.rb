@@ -42,6 +42,15 @@ class Doctor
       current_doctor = Doctor.new(:first_name => doctor.fetch('first_name'), :last_name => doctor.fetch('last_name'), :speciality_name => doctor.fetch('speciality_name'), :id => doctor.fetch('id'))
       speciality_array.push(current_doctor)
     end
-    speciality_array  
+    speciality_array
   end
+  define_singleton_method(:get_speciality_name) do
+    result = DB.exec("SELECT DISTINCT speciality_name FROM doctors;")
+    speciality_types_array = []
+    result.each() do |speciality|
+      speciality_types_array.push(speciality.fetch('speciality_name'))
+    end
+    speciality_types_array
+  end
+
 end

@@ -1,6 +1,11 @@
 <h1>Medical Office</h1>
 
-<h3>List of Doctors:<h3>
+<h3>View Doctors by Speciality<h3>
+<form action="/doctor_speciality" method="post">
+  <select class="form_group">
+    <option></option>
+  </select>
+</form>
 
 <ul>
   <% @doctors_list.each() do |doctor| %>

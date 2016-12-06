@@ -40,4 +40,8 @@ class Patient
     end
     patient_group_array
   end
+
+  define_singleton_method(:count_patients) do |doctor_id|
+    Patient.get_patient_group(doctor_id).count()
+  end
 end

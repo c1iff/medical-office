@@ -4,7 +4,7 @@
 
   <ul>
     <% @doctors_list.each() do |doctor| %>
-    <li> <a href="/doctor/<%= doctor.id()%>"><h4> Dr. <%= doctor.last_name() %> </h4></li></a>
+    <li> <a href="/doctor/<%= doctor.id()%>"><h4> Dr. <%= doctor.last_name() %> - <%= Patient.count_patients(doctor.id())%> Patients</h4></li></a>
     <% end %>
   </ul>
 

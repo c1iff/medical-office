@@ -72,5 +72,15 @@ describe(Doctor) do
       expect(Doctor.get_speciality_name()).to(eq(['Pediatrics', 'Internal Medicine']))
     end
   end
-
+  describe('.sort_doctors') do
+    it('returns sorted list of doctor names') do
+      new_doctor = Doctor.new(:first_name => 'Bob', :last_name => 'Blahblah', :speciality_name => 'Pediatrics')
+      new_doctor.save()
+      new_doctor_two = Doctor.new(:first_name => 'Julia', :last_name => 'Gonzalez', :speciality_name => 'Pediatrics')
+      new_doctor_two.save()
+      new_doctor_three = Doctor.new(:first_name => 'Joy', :last_name => 'Dennis', :speciality_name => 'Internal Medicine')
+      new_doctor_three.save()
+      expect(Doctor.sort_doctors()).to(eq([new_doctor, new_doctor_three, new_doctor_two]))
+    end
+  end
 end

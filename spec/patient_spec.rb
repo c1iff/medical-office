@@ -67,4 +67,15 @@ describe(Patient) do
     end
   end
 
+  describe('.count_patients') do
+    it ('returns the number of patients with a given doctor id') do
+      new_patient = Patient.new(:first_name => 'Julia', :last_name => 'Gonzalez', :birthdate => '1992-05-01 00:00:00', :doctor_id => 1)
+      new_patient.save()
+      new_patient_two = Patient.new(:first_name => 'Julia', :last_name => 'Gonzalez', :birthdate => '1992-05-01 00:00:00', :doctor_id => 1)
+      new_patient_two.save()
+      new_patient_three = Patient.new(:first_name => 'Julia', :last_name => 'Gonzalez', :birthdate => '1992-05-01 00:00:00', :doctor_id => 2)
+      new_patient_three.save()
+      expect(Patient.count_patients(1)).to(eq(2))
+    end
+  end
 end

@@ -14,7 +14,7 @@ class Doctor
   end
 
   define_singleton_method(:all) do
-    returned_doctors = DB.exec('SELECT * FROM doctors')
+    returned_doctors = DB.exec("SELECT * FROM doctors;")
     doctor_array = []
     returned_doctors.each() do |doctor|
       current_doctor = Doctor.new(:first_name => doctor.fetch('first_name'), :last_name => doctor.fetch('last_name'), :speciality_name => doctor.fetch('speciality_name'), :id => doctor.fetch('id'))
@@ -44,7 +44,7 @@ class Doctor
     end
     speciality_array
   end
-  
+
   define_singleton_method(:get_speciality_name) do
     result = DB.exec("SELECT DISTINCT speciality_name FROM doctors;")
     speciality_types_array = []
@@ -54,4 +54,13 @@ class Doctor
     speciality_types_array
   end
 
+  define_singleton_method(:sort_doctors) do
+    returned_sort_doctors = DB.exec("SELECT * FROM doctors ORDER BY last_name ASC;")
+    sorted_doctors_array = []
+    returned_sort_doctors.each() do |doctor|
+      current_doctor = Doctor.new(:first_name => doctor.fetch('first_name'), :last_name => doctor.fetch('last_name'), :speciality_name => doctor.fetch('speciality_name'), :id => doctor.fetch('id'))
+      sorted_doctors_array.push(current_doctor)
+    end
+    sorted_doctors_array
+  end
 end

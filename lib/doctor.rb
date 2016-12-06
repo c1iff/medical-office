@@ -44,6 +44,7 @@ class Doctor
     end
     speciality_array
   end
+  
   define_singleton_method(:get_speciality_name) do
     result = DB.exec("SELECT DISTINCT speciality_name FROM doctors;")
     speciality_types_array = []

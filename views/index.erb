@@ -1,17 +1,24 @@
 <h1>Medical Office</h1>
 
-<h3>View Doctors by Speciality<h3>
+<h3>View Doctors</h3>
+
+  <ul>
+    <% @doctors_list.each() do |doctor| %>
+    <li> <a href="/doctor/<%= doctor.id()%>"><h4> Dr. <%= doctor.last_name() %> </h4></li></a>
+    <% end %>
+  </ul>
+
 <form action="/doctor_speciality" method="post">
-  <select class="form_group">
-    <option></option>
+  <select name="speciality_name" class="form_group">
+    <% @specialities.each() do |speciality| %>
+    <option> <%= speciality %> </option>
+    <% end %>
   </select>
+  <br>
+  <br>
+  <button type='submit' class="btn btn-primary btn-lg">Filter by Speciality</button>
 </form>
 
-<ul>
-  <% @doctors_list.each() do |doctor| %>
-    <li> <a href="/doctor/<%= doctor.id()%>"> Dr. <%= doctor.last_name() %> </li></a>
-  <% end %>
-</ul>
 
 <h3>Add a new Doctor (for Admin Only)</h3>
 <form action="/new_doctor" method="post">

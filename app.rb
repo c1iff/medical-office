@@ -9,8 +9,14 @@ require('pry')
 DB = PG.connect({:dbname => "office"})
 
 get('/') do
+  @doctors_list = Doctor.all()
+  @specialities = Doctor.get_speciality_name()
+  erb(:index)
+end
 
-  @doctors_list = Doctor.find_doctor_speciality('Pediatrics')
+post('/doctor_speciality') do
+  @doctors_list = Doctor.find_doctor_speciality(params[:speciality_name])
+  @specialities = Doctor.get_speciality_name()
   erb(:index)
 end
 

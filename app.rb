@@ -23,5 +23,16 @@ post('/new_doctor') do
 end
 
 get('/doctor/:id') do
-  current_doctor = Doctor.find(params.fetch('id'))
+  @current_doctor = Doctor.find(params.fetch('id').to_i())
+  erb(:doctor)
+end
+
+post('/new_patient') do
+  @first_name = params.fetch('first_name')
+  @last_name = params.fetch('last_name')
+  @birthdate = params.fetch('birthdate')
+  @doctor_id = params.fetch('doctor_id').to_i
+  @new_patient = Patient.new(:first_name => @first_name, :last_name => @last_name, :birthdate => @birthdate, :doctor_id => @doctor_id)
+  @new_patient.save()
+  erb(:success)
 end

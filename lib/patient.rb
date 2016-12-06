@@ -30,4 +30,14 @@ class Patient
     &(self.last_name().==(another_patient.last_name())).
     &(self.birthdate().==(another_patient.birthdate()))
   end
+
+  define_singleton_method(:get_patient_group) do |doctor_id|
+    returned_patients = DB.exec("SELECT * FROM patients WHERE doctor_id = #{doctor_id}")
+    patient_group_array = []
+    returned_patients.each() do |patient|
+      current_patient = Patient.new(:first_name => patient.fetch('first_name'), :last_name => patient.fetch('last_name'), :birthdate => patient.fetch('birthdate'), :id => patient.fetch('id'), :doctor_id => patient.fetch('doctor_id'))
+      patient_group_array.push(current_patient)
+    end
+    patient_group_array
+  end
 end

@@ -1,0 +1,27 @@
+<h3>Doctor Information</h3>
+
+<h4>First Name: <%=@current_doctor.first_name()%></h4>
+<h4>Last Name: <%=@current_doctor.last_name()%></h4>
+<h4>Speciality: <%=@current_doctor.speciality_name()%></h4>
+
+<h4>Current Patients:</h4>
+<ul>
+  <% Patient.get_patient_group(@current_doctor.id()).each() do |patient| %>
+    <li> <%= patient.first_name() %> </li>
+  <% end %>
+</ul>
+
+
+<h3>Add a new Patient (for Admin Only)</h3>
+<form action="/new_patient" method="post">
+  <div class="from-group">
+    <input id="doctor_id" name= "doctor_id" type="hidden" value="<%= @current_doctor.id() %>">
+    <label for='first_name' type='text'> Add First Name</label>
+    <input id='first_name' name='first_name' type='text' class="form-control">
+    <label for='last_name' type='text'> Add Last Name</label>
+    <input id='last_name' name='last_name' type='text' class="form-control">
+    <label for='birthdate' type='text'> Add Birthdate (YYYY-MM-DD)</label>
+    <input id='birthdate' name='birthdate' type='text' class="form-control"><br>
+    <button type='submit' class="btn btn-primary btn-lg">Add Patient</button>
+  </div>
+</form>

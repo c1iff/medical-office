@@ -54,4 +54,17 @@ describe(Patient) do
     end
   end
 
+  describe('.get_patient_group') do
+    it ('returns an array containing all the patients with a doctor id') do
+      new_patient = Patient.new(:first_name => 'Julia', :last_name => 'Gonzalez', :birthdate => '1992-05-01 00:00:00', :doctor_id => 1)
+      new_patient.save()
+      new_patient_two = Patient.new(:first_name => 'Julia', :last_name => 'Gonzalez', :birthdate => '1992-05-01 00:00:00', :doctor_id => 1)
+      new_patient_two.save()
+      new_patient_three = Patient.new(:first_name => 'Julia', :last_name => 'Gonzalez', :birthdate => '1992-05-01 00:00:00', :doctor_id => 2)
+      new_patient_three.save()
+      expect(Patient.get_patient_group(1)).to(eq([new_patient, new_patient_two]))
+
+    end
+  end
+
 end

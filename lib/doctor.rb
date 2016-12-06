@@ -5,7 +5,7 @@ class Doctor
     @first_name = attributes.fetch(:first_name)
     @last_name = attributes.fetch(:last_name)
     @speciality_name = attributes.fetch(:speciality_name)
-    @id = nil
+    @id = attributes.fetch(:id, nil)
   end
 
   define_method(:save) do
@@ -17,7 +17,7 @@ class Doctor
     returned_doctors = DB.exec('SELECT * FROM doctors')
     doctor_array = []
     returned_doctors.each() do |doctor|
-      current_doctor = Doctor.new(:first_name => doctor.fetch('first_name'), :last_name => doctor.fetch('last_name'), :speciality_name => doctor.fetch('speciality_name'))
+      current_doctor = Doctor.new(:first_name => doctor.fetch('first_name'), :last_name => doctor.fetch('last_name'), :speciality_name => doctor.fetch('speciality_name'), :id => doctor.fetch('id'))
       doctor_array.push(current_doctor)
     end
     doctor_array
@@ -31,7 +31,7 @@ class Doctor
 
   define_singleton_method(:find) do |doctor_id|
     doctor_id_found = DB.exec("SELECT * FROM doctors WHERE id = '#{doctor_id}';").first()
-    found_doctor = Doctor.new(:first_name => doctor_id_found.fetch('first_name'), :last_name => doctor_id_found.fetch('last_name'), :speciality_name => doctor_id_found.fetch('speciality_name'))
+    found_doctor = Doctor.new(:first_name => doctor_id_found.fetch('first_name'), :last_name => doctor_id_found.fetch('last_name'), :speciality_name => doctor_id_found.fetch('speciality_name'), :id => doctor_id_found.fetch('id'))
     found_doctor
   end
 end

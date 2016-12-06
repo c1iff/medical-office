@@ -34,4 +34,14 @@ class Doctor
     found_doctor = Doctor.new(:first_name => doctor_id_found.fetch('first_name'), :last_name => doctor_id_found.fetch('last_name'), :speciality_name => doctor_id_found.fetch('speciality_name'), :id => doctor_id_found.fetch('id'))
     found_doctor
   end
+
+  define_singleton_method(:find_doctor_speciality) do |speciality_name|
+    doctor_speciality_found = DB.exec("SELECT * FROM doctors WHERE speciality_name = '#{speciality_name}';")
+    speciality_array = []
+    doctor_speciality_found.each() do |doctor|
+      current_doctor = Doctor.new(:first_name => doctor.fetch('first_name'), :last_name => doctor.fetch('last_name'), :speciality_name => doctor.fetch('speciality_name'), :id => doctor.fetch('id'))
+      speciality_array.push(current_doctor)
+    end
+    speciality_array  
+  end
 end

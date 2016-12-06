@@ -9,7 +9,7 @@ require('pry')
 DB = PG.connect({:dbname => "office"})
 
 get('/') do
-  @doctors_list = Doctor.all()
+  @doctors_list = Doctor.sort_doctors()
   @specialities = Doctor.get_speciality_name()
   erb(:index)
 end

@@ -11,7 +11,7 @@
 <form action="/doctor_speciality" method="post">
   <select name="speciality_name" class="form_group">
     <% @specialities.each() do |speciality| %>
-    <option> <%= speciality %> </option>
+    <option value="<%= speciality %>"> <%= speciality %> </option>
     <% end %>
   </select>
   <br>

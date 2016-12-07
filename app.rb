@@ -6,7 +6,7 @@ require('./lib/patient')
 require('pg')
 require('pry')
 
-DB = PG.connect({:dbname => "office"})
+DB = PG.connect({:dbname => "office_test"})
 
 get('/') do
   @doctors_list = Doctor.sort_doctors()
